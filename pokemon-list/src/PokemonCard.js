@@ -1,13 +1,20 @@
 import React from 'react';
-import './PokemonCard.css'; // Import CSS for styling
+import { Link } from 'react-router-dom';
+import './PokemonCard.css';
 
-const PokemonCard = ({ name, image }) => {
+const PokemonCard = ({ pokemons }) => {
 return (
-<div className="card">
-    <img src={image} alt={name} />
-    <div className="container">
-    <h4><b>{name}</b></h4>
-    </div>
+<div className="pokemon-container">
+    {pokemons.map((pokemon, index) => (
+    <Link to={`/pokemon/${pokemon.name}`} key={index} className="pokemon-card">
+        <div className="card">
+        <img src={pokemon.image} alt={pokemon.name} />
+        <div className="container">
+            <h4><b>{pokemon.name}</b></h4>
+        </div>
+        </div>
+    </Link>
+    ))}
 </div>
 );
 };
