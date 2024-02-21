@@ -8,7 +8,7 @@ return (
     {pokemons.map((pokemon, index) => (
     <Link to={`/pokemon/${pokemon.name}`} key={index} className="pokemon-card">
         <div className="card">
-        <img src={pokemon.image} alt={pokemon.name} />
+        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`} alt={pokemon.name} />
         <div className="container">
             <h4><b>{pokemon.name}</b></h4>
         </div>
