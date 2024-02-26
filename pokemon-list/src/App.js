@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
 import PokemonCard from './PokemonCard';
 import PokemonDetails from './PokemonDetails';
+import { ThemeProvider } from 'styled-components';
+import theme from './theme';
 import './App.css'; 
 
 const App = () => {
@@ -29,26 +30,16 @@ const App = () => {
     fetchPokemons();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <Skeleton height={50} width={200} count={3} />
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<PokemonCard pokemons={pokemons} />} />
-          <Route path="/pokemon/:name" element={<PokemonDetails />} />
-        </Routes>
-      </div>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<PokemonCard pokemons={pokemons} />} />
+            <Route path="/pokemon/:name" element={<PokemonDetails />} />
+          </Routes>
+        </div>
+      </ThemeProvider>
     </Router>
   );
 };

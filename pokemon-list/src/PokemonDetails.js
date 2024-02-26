@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import './PokemonDetails.css';
+import styled from 'styled-components';
 
 const PokemonDetails = () => {
 const { name } = useParams();
@@ -28,25 +28,37 @@ fetchPokemonDetails();
 }, [name]);
 
 if (loading) {
-return <div>Loading...</div>;
+return <Loading>Loading...</Loading>;
 }
 
 if (error) {
-return <div>Error: {error}</div>;
+return <Error>Error: {error}</Error>;
 }
 
 return (
-    <div className="pokemon-details-container">
-        <h1>{pokemonDetails.name}</h1>
-        <img src={pokemonDetails.sprites.front_default} alt={pokemonDetails.name}/>
-        <h2>Abilities</h2>
-        <ul>
-        {pokemonDetails.abilities.map((ability) => (
-            <li key={ability.ability.name}>{ability.ability.name}</li>
-        ))}
-        </ul>
-    </div>
+<DetailsContainer>
+    <h1>{pokemonDetails.name}</h1>
+    <img src={pokemonDetails.sprites.front_default} alt={pokemonDetails.name}/>
+    <h2>Abilities</h2>
+    <ul>
+    {pokemonDetails.abilities.map((ability) => (
+        <li key={ability.ability.name}>{ability.ability.name}</li>
+    ))}
+    </ul>
+</DetailsContainer>
 );
 };
+
+const Loading = styled.div`
+  /* Your styles for loading state */
+`;
+
+const Error = styled.div`
+  /* Your styles for error state */
+`;
+
+const DetailsContainer = styled.div`
+  /* Your styles for the details container */
+`;
 
 export default PokemonDetails;
